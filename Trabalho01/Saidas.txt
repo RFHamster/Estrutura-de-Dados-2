@@ -1,0 +1,5 @@
+Main 01 - Contador = 60, logo O(N * Log(n)) < contador <= O(n^2)
+
+Main 02 - Contador = 4038804, logo O(n^3) < contador <= O(2^n)
+
+Main 03 - Contador = 54930, logo O(n^3) < contador <= O(2^n)

@@ -8,7 +8,7 @@ int funcaox(int a){
     if (a<2){
         return 1;
     }else{
-        contarCp(&comp.contadorMat, 1);
+        contarCp(&comp.contadorMat, 3);
         return funcaox(a-1) + funcaox(a-2); 
     }
 }
