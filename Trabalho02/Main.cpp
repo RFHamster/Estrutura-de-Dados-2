@@ -72,16 +72,18 @@ int buscaboyler(string cadeia, string palavra, int tc, int tp)
 
 int main(){
     FILE *arq1, *arq2;
-    string aux;
-    string s;
+    string aux, s;
 
     cout << "Digite o nome do Arquivo (lembre-se do .txt)" << endl;
     cin >> aux;
     arq1 = fopen(aux.data(), "r");
+    if(arq1 == NULL){
+        cout << "Arquivo Inexistente" << endl;
+        return 0;
+    }
 
     int i = 0;
     char c;
-
     while((c=fgetc(arq1)) != EOF){
         s+=c;
         i++;
@@ -91,26 +93,30 @@ int main(){
     string palavraTrocar;
     string palavraAchar;
     cout << "Digite a palavra a ser encontrada" << endl;
-    cin >> palavraAchar;
-    cout << "Digite a palavra para colocar no lugar" << endl;
-    cin >> palavraTrocar;
+    cin.sync();
+    getline(cin, palavraAchar);
+    while(!palavraAchar.empty()){
+        cout << "Digite a palavra para colocar no lugar" << endl;
+        cin >> palavraTrocar;
+        cin.sync();
 
-    buscaboyler(s,palavraAchar,s.length(),palavraAchar.length());
+        buscaboyler(s,palavraAchar,s.length(),palavraAchar.length());
 
-    int num = removeLista();
-    while(num != -1){
-        s.replace(num, palavraAchar.length(), palavraTrocar);
-        num = removeLista();
+        int num = removeLista();
+        while(num != -1){
+            s.replace(num, palavraAchar.length(), palavraTrocar);
+            num = removeLista();
+        }
+
+        cout << s << endl;
+        cout << "Digite a palavra a ser encontrada" << endl;
+        getline(cin, palavraAchar);
     }
-
-    cout << s << endl;
-
+    
     cout << "Digite o nome do Arquivo a ser Criado" << endl;
     cin >> aux;
-
     arq2 = fopen(aux.data(), "w");
-
     for(i = 0; i<s.length();i++){
         putc(s[i],arq2);
-    }
+    }  
 }
