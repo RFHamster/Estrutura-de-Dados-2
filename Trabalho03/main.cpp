@@ -5,8 +5,15 @@ using namespace std;
 vector<string> Codificacao;
 int quantasLetras;
 
-void shannon2(int inicio, int fim, vector<pair<char, int>> frequenciaLetra, string escrita){
+//Nessa função de shannon, ela somente escreve no vector de codificação quando entra
+//numa encruzilhada da árvore que irá acabar, ou seja, quando, ao fazer o shannon, sobra um par ou um elemento sozinho
+//assim, nesses cassos ele escreve no vector, entretanto, se isso não acontecer, ele armazena essa escrita na string escrita
+//e vai repetindo o processo até chegar na encruzilhada e escrever todos os chars
+void shannon(int inicio, int fim, vector<pair<char, int>> frequenciaLetra, string escrita){
     if(inicio == fim){
+        if(escrita == ""){
+            Codificacao[inicio] += "0";
+        }
         Codificacao[inicio] += escrita;
         return;
     }
@@ -26,37 +33,12 @@ void shannon2(int inicio, int fim, vector<pair<char, int>> frequenciaLetra, stri
         index++;
         total -= frequenciaLetra.at(index).second;
     }
-
-    shannon2(inicio, index-1, frequenciaLetra,escrita+"1");
-    shannon2(index, fim, frequenciaLetra,escrita+"0");
+    shannon(inicio, index-1, frequenciaLetra,escrita+"1");
+    shannon(index, fim, frequenciaLetra,escrita+"0");
 }
 
-void shannon(int inicio, int fim, vector<pair<char, int>> frequenciaLetra){
-    if(inicio == fim){
-        Codificacao[inicio] += "0";
-        return;
-    }
-    if(inicio == fim-1){
-        Codificacao[inicio] += "1"; 
-        Codificacao[fim] += "0";
-        return;
-    }
-    int total = 0;
-    for(int i = inicio; i<=fim;i++){
-        total += frequenciaLetra.at(i).second;
-    }
-    total = total/2;
-    int index = inicio;
-    total -= frequenciaLetra.at(index).second;
-    while(total>0){
-        index++;
-        total -= frequenciaLetra.at(index).second;
-    }
-
-    shannon2(inicio, index-1, frequenciaLetra,"1");
-    shannon2(index, fim, frequenciaLetra,"0");
-}
-
+//Função para converter uma string texto para um texto de bits (0s e 1s), pegando cada char na cadeia
+//e vendo o valor dele na codificação, convertendo o mesmo para um bit
 string converteTexto(string texto, map<char,string> codigos){
     string s = "";
     for(int i = 0; i<texto.size();i++){
@@ -66,6 +48,9 @@ string converteTexto(string texto, map<char,string> codigos){
     return s;
 }
 
+//Função que converte um byte com 8 bits (00010101) para um char, assim fazendo uma compressão
+//basicamente eu converto essa cadeia de bits para seu referencial em decimal
+//e esse decimal eu converto para a tabela ASCII
 char BytesToBits(string s){
     int somador = 1;
     int caractere = 0;
@@ -79,6 +64,8 @@ char BytesToBits(string s){
     return c;
 }
 
+//Função que desconverte o texto, pegando cada char da cadeia e transformando em 0s e 1s atraves 
+//da descodificação passada como parâmetro
 string desconverteTexto(string texto, map<char,string> descodificarBitsBytes){
     string s = "";
     for(int i = 0; i<texto.size();i++){
@@ -97,6 +84,8 @@ int main (){
     }
 
     //Contando a Frequencia das Letras
+    //primeiro criando um vetor de tamanho 256
+    //para comportar todos os chars da ASCII
     vector<pair<char, int>>frequenciaLetra;
     string texto;
     vector<int> frequencia;
@@ -107,6 +96,8 @@ int main (){
         frequencia.push_back(0);
     }
 
+
+    //Lê o texto e vai contando a sua frequencia no vetor frequencia
     do{
         frequencia[c]++;
         texto+=c;
@@ -115,6 +106,8 @@ int main (){
     cout << " - Texto a ser Codificado - " << endl;
     cout << texto << endl;
 
+    //criando um par, char e sua frequencia,
+    //e adicinando todos esses que a frequencia é maior que 0
     for(int i = 0;i<256;i++){
         if(frequencia[i] > 0){
             char letra = i;
@@ -122,16 +115,23 @@ int main (){
             totalLetras+=frequencia[i];
         }
     }
+    //adicionando o EOF
     c = 26;
     frequenciaLetra.emplace_back(c,1);
     texto += c;
+    //Ordenando o vetor de forma crescente de frequencia
     sort(frequenciaLetra.begin(),frequenciaLetra.end(), [] (const auto &x, const auto &y) {return x.second < y.second;});
 
     quantasLetras = frequenciaLetra.size();
     for(int i = 0; i<quantasLetras;i++){
         Codificacao.push_back("");
     }
-    shannon(0,(quantasLetras-1),frequenciaLetra);
+
+    //utilizando a função shannon, que precisa do inicio do vector, seu tamanho-1, a tabela de frequencia
+    //que sera usada para criar a codificação e uma string vazia para escrever depois
+    string escrita = "";
+    shannon(0,(quantasLetras-1),frequenciaLetra,escrita);
+
 
     map<char,string> codigos;
     cout << "\n - Caracter - Frequencia - Codigos - " << endl;
@@ -145,6 +145,9 @@ int main (){
     cout << "\n - Texto em Bytes - " << endl;
     cout << textoBin << endl;
 
+    //com o texto em 0s e 1s, a gente agrupa ele 8 a 8
+    //e vai passando cada um desses para a função que converte 1 byte para char,
+    //adicionadno o resultado na string de TextoBits
     string textoBits = "";
     int tamanho = 0;
     int tamanho2 = 8;
