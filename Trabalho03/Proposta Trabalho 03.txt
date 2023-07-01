@@ -1,0 +1,61 @@
+3º trabalho de ED2
+
+Compressão
+
+Entrega no Moodle e relato: até as 10:00 do dia 25/05.
+
+Escreva o programa usando C/C++ no Codeblocks.
+
+Entregar:
+
+- O programa fonte .c ,
+
+- Relatório PDF, padrão ABNT, com capa e sumário, descrevendo o programa, suas funções e suas limitações.
+
+Não compacte os arquivos.
+
+ 
+
+Descrição do trabalho
+
+·         Ler o texto dado.
+
+·         Contar as frequências de todos os símbolos.
+
+·         Inserir o símbolo 26 (EOF) com frequência 1.
+
+·         Codificar todos os símbolos usando Shannon-Fano.
+
+·         Listar todos os símbolos encontrados com suas cadeias de bits.
+
+Ex: A 101 b 001 EOF 111111
+
+·         Converter o texto para a sequência de bits correspondente. EOF deve ser o último código da sequência.
+
+·         Imprimir esta sequência.
+
+Ex: 100010100100110100100010
+
+·         Comprimir a lista de bits em bytes. Se necessário completar o último byte com 0s.
+
+·         Listar a sequência de bytes obtida. 
+
+Ex: 32 212 34 26
+
+·         Bônus (1 pt): descomprimir a sequência de bytes em bits e os bits nos símbolos adequados.
+
+·         Imprimir descompressão obtida.
+
+Ex: O pão estava quentinho ...
+
+ 
+
+Implementação
+
+O problema deve ser resolvido usando os algoritmos dados em aula.
+
+O programa deve possuir comentários suficientes para que se compreenda seus passos.
+
+Texto a ser trabalhado:
+
+Não acredite em algo simplesmente porque ouviu. Não acredite em algo simplesmente porque todos falam a respeito. Não acredite em algo simplesmente porque está escrito em seus livros religiosos. Não acredite em algo so porque seus professores e mestres dizem que e verdade. Não acredite em tradições só porque foram passadas de geração em geração. Mas, depois de muita análise e observação, se você vê que algo concorda com a razão e que conduz ao bem e benefício de todos, aceite-o e viva-o.

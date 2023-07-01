@@ -1,0 +1,99 @@
+1º trabalho de ED2
+
+TAD Complexidade
+
+Entrega: 04/04 até as 23:00 no Moodle
+
+Escreva o programa usando C no Codeblocks.
+
+Entregar:
+
+- O programa fonte .c ,
+
+- A biblioteca de tads  .h, e
+
+- Os fontes usando o TAD e a saída para cada execução em .txt
+
+- Relatório PDF, padrão ABNT, com capa e sumário, descrevendo o TAD e a forma de usar, além de suas limitações.
+
+Não compacte os arquivos.
+
+ 
+
+Descrição do trabalho
+
+ 
+
+Criar o TAD Complexidade com a assinatura (integer, { iniciarCp(integer), contarCp(integer, integer), finalizarCp(integer, int) } ).
+
+ 
+
+A função iniciarCp deve iniciar os contadores de operações, ciclos e tempo.
+
+A função contarCp acrescentar o valor do parâmetro ao contador.
+
+A função finalizarCp captura os valores finais de ciclos e tempo. Faz uma printagem do resumo dos contadores. Por último faz uma análise de qual ordem de O() mais se aproxima seu contador.
+
+ 
+
+Faça inserções das funcionalidades do TAD em cada programa abaixo e rode-os com n=30.
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Programa 1:
+
+Int main() {
+
+int n,i,a;
+
+a=2;
+
+for (i=0;i<n;i++)
+
+     a=a*2;
+
+}
+
+ 
+
+Programa 2:
+
+int funcaox(int a){
+
+if a<2 return 1;
+
+else return funcaox(a-1) + funcaox(a-2);}
+
+ 
+
+int main(){
+
+int n;
+
+funcaox(n);}
+
+ 
+
+programa 3:
+
+int main(){
+
+int i, j, k,n;
+
+for (i=0;i<n;i++){
+
+     for (j=0;j<n;j++){
+
+           for (k=0;k<n;k++){
+
+                 a=a*2;  }}}
+
+}

@@ -1,0 +1,25 @@
+4o Trabalho de ED2 – Grafos
+
+Entrega: 14/06 até as 23:30 no Moodle
+
+Entregar:
+
+- Relatório PDF, padrão ABNT, com capa e sumário, descrevendo o programa e os resultados.
+
+ 
+
+Descrição do trabalho
+
+Um professor tem uma turma de 25 alunos, distribuídos na sala em 5 fileiras de 5 carteiras. na forma de uma grade quadrada uniforme.
+
+Pretende aplicar uma prova diferenciada para cada grupo de alunos, de forma a impedir a "cola" entre os alunos. 
+
+Ele considera que um aluno seria capaz de "colar" dos alunos imediatamente próximos, tanto na vertical, horizontal e diagonais.
+
+Use o algoritmo  para colorir um grafo, dado em aula, ,e responda as questões: 
+
+ - Quantas provas diferentes deverão ser feitas? 
+
+- Quantas de cada uma? 
+
+- Qual a distribuição destas provas pelas posições dos alunos?
